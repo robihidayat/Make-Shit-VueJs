@@ -9,18 +9,16 @@ RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.
 RUN yum install -y npm
 
 #Copy Packages
-COPY server/*.json .
+COPY client client
 
 RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
-# Copy app to /src
-COPY src /src
-
 # Install app and dependencies into /src
-RUN cd /src; npm install
+RUN cd /client; npm install
+
 
 EXPOSE 8080
 
-CMD cd /src && node start
+CMD cd /client && node start
